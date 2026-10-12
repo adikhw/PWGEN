@@ -38,4 +38,4 @@ def generate_password(length, use_lower, use_upper, use_digits, use_symbols):
 
     secrets.SystemRandom().shuffle(chars)
     return "".join(chars)
-    
+

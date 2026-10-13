@@ -116,3 +116,45 @@ def has_common_words(password):
 
     password = password.lower()
     return any(word in password for word in COMMON_WORDS)
+
+
+def assess_password(password):
+    info = analyze_basic(password)
+    length = info["length"]
+    types = info["types"]
+
+    weak_reasons = []
+
+    if length < 8:
+        weak_reasons.append("Password is too short (minimum 8 characters)")
+    if len(types) == 1:
+        weak_reasons.append("Password uses only 1 type of character")
+    if has_repeat(password):
+        weak_reasons.append("Password has repeating characters")
+    if has_sequence(password):
+        weak_reasons.append("Password has a sequence (e.g. 1234 or abcd)")
+    if has_common_words(password):
+        weak_reasons.append("Password contains common words")
+
+    if weak_reasons:
+        level = "Weak"
+        reasons = weak_reasons
+
+    elif length >= 12 and len(types) >= 3:
+        level = "Strong"
+        reasons = [
+            "Sufficient length (at least 12 characters)",
+            "Uses at least 3 character types",
+        ]
+
+    else:
+        level = "Medium"
+        reasons = []
+
+        if length < 12:
+            reasons.append("Fewer than 12 characters")
+
+        if len(types) < 3:
+            reasons.append("Fewer than 3 character types")
+
+    return {"level": level, "reasons": reasons}

@@ -60,7 +60,7 @@ python --version
 
 ```bash
 # 1. Ambil project-nya
-git clone https://github.com/<username-kamu>/pwgen.git
+git clone https://github.com/adikhw/pwgen.git
 cd pwgen
 
 # 2. Jalankan

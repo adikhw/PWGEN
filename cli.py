@@ -3,6 +3,7 @@ from validator import assess_password
 
 
 def ask_int(prompt, low, high):
+    """Prompt for an integer within the specified range."""
     while True:
         text = input(prompt)
         if not text:
@@ -23,6 +24,7 @@ def ask_int(prompt, low, high):
 
 
 def ask_yes_no(prompt):
+    """Prompt the user for a yes-or-no answer."""
     while True:
         answer = input(prompt + " (y/n): ").lower().strip()
 
@@ -35,6 +37,7 @@ def ask_yes_no(prompt):
 
 
 def generate_menu():
+    """Collect options and generate a password."""
     length = ask_int("Length: ", 8, 64)
 
     use_lower = ask_yes_no("Use lowercase letters?")
@@ -50,6 +53,7 @@ def generate_menu():
 
 
 def validate_menu():
+    """Check password strength and display the assessment."""
     password = input("Password: ")
 
     try:
@@ -63,6 +67,7 @@ def validate_menu():
 
 
 def show_menu_and_run():
+    """Display the main menu and handle user choices."""
     while True:
         print("1. Generate password")
         print("2. Check password strength")
@@ -76,4 +81,3 @@ def show_menu_and_run():
         else:
             print("Goodbye")
             return
-

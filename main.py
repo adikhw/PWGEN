@@ -1,6 +1,7 @@
 from cli import show_menu_and_run
 
 def main():
+    """Run the application and handle unexpected interruptions or errors."""
     try:
         show_menu_and_run()
     except (KeyboardInterrupt, EOFError):

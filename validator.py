@@ -20,16 +20,19 @@ SYMBOL_RE = re.compile(r"[^a-zA-Z0-9]")
 
 
 def _require_str(password):
+    """Ensure the password is a string."""
     if not isinstance(password, str):
         raise TypeError("Password must be a string")
 
 
 def _require_valid_n(n):
+    """Ensure n is an integer greater than or equal to 2."""
     if type(n) is not int or n < 2:
         raise ValueError("n must be an integer >= 2")
 
 
 def check_length(password):
+    """Validate the password and return its length."""
     _require_str(password)
     if password == "":
         raise ValueError("Password cannot be empty")
@@ -38,6 +41,7 @@ def check_length(password):
 
 
 def detect_char_types(password):
+    """Detect the character types present in the password."""
     _require_str(password)
     types = set()
 
@@ -55,12 +59,14 @@ def detect_char_types(password):
 
 
 def analyze_basic(password):
+    """Return the password length and its character types."""
     length = check_length(password)
     types = detect_char_types(password)
     return {"length": length, "types": types}
 
 
 def detect_char_types_regex(password):
+    """Detect password character types using regular expressions."""
     _require_str(password)
     types = set()
 
@@ -77,6 +83,7 @@ def detect_char_types_regex(password):
 
 
 def has_repeat(password, n=3):
+    """Check whether the password contains n consecutive repeated characters."""
     _require_str(password)
     _require_valid_n(n)
 
@@ -85,6 +92,7 @@ def has_repeat(password, n=3):
 
 
 def has_sequence(password, n=4):
+    """Check for ascending or descending ASCII alphanumeric sequences."""
     _require_str(password)
     _require_valid_n(n)
 
@@ -112,6 +120,7 @@ def has_sequence(password, n=4):
 
 
 def has_common_words(password):
+    """Check whether the password contains any common weak words."""
     _require_str(password)
 
     password = password.lower()
@@ -119,6 +128,7 @@ def has_common_words(password):
 
 
 def assess_password(password):
+    """Assess password strength and return its level and reasons."""
     info = analyze_basic(password)
     length = info["length"]
     types = info["types"]

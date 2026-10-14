@@ -6,6 +6,7 @@ SYMBOLS = "!@#$%^&*()-_=+[]{};:,.?"
 
 # Build pools function
 def build_pools(use_lower, use_upper, use_digits, use_symbols):
+    """Build character pools based on the selected character types."""
     pools = []
 
     if use_lower: pools.append(string.ascii_lowercase)
@@ -17,6 +18,7 @@ def build_pools(use_lower, use_upper, use_digits, use_symbols):
 
 # Generate password function
 def generate_password(length, use_lower, use_upper, use_digits, use_symbols):
+    """Generate a secure password with the selected character types."""
 
     if type(length) is not int:
         raise ValueError("Length must be an integer")
@@ -38,4 +40,3 @@ def generate_password(length, use_lower, use_upper, use_digits, use_symbols):
 
     secrets.SystemRandom().shuffle(chars)
     return "".join(chars)
-
